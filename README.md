@@ -9,7 +9,9 @@ OpenvSwitch is used.
 Integration with OpenDaylight openflow controller.
 
 # Current limitations
-- Unable to detect interface types, i.e. (enp0sX or ethX). Pre-installation scripts need to be changed manually;
+- Unable to detect interface types, i.e. (enp0sX or ethX). 
+  - Pre-installation scripts need to be changed manually;
+  - OpenvSwitch interfaces need to be changed manually in network and compute files (os-network-network.sh and os-compute-network.sh).
 - Configuration files from controller and network nodes not acessible from other servers. Configuration files need to be copied manually.
 
 # To do
