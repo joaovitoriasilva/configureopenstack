@@ -149,7 +149,7 @@ if [[ "$1" != "following" ]]; then
     exit
   fi
   # Warnings for the user
-  echo "This script was tested in Ubuntu 14.04. Other versions weren't tested."
+  echo "This script was tested in Ubuntu 16.04. Other versions weren't tested."
   echo "You linux distribution will be tested for compatibility.\n"
   echo "This script will install the Neutron OpenStack controller module."
   echo "This is a controller script."
@@ -164,8 +164,8 @@ if [[ "$1" != "following" ]]; then
   # Checking linux distribuion version. Must be Ubuntu 14.04
   echo "1 - Checking your linux distribution"
   UV=$(lsb_release -r)
-  if [[ "$UV" != *"14.04"* ]]; then
-    echo "This ubuntu version isn't 14.04."
+  if [[ "$UV" != *"16.04"* ]]; then
+    echo "This ubuntu version isn't 16.04."
     read -r -p "Do you wish to continue? [y/N]" responseVersion
     if [[ $responseVersion =~ ^([yY][eE][sS]|[yY])$ ]]; then
       echo ""

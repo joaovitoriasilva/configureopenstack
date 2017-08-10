@@ -327,41 +327,32 @@ expect eof
     echo "11 - Installing Horizon module"
     sleep 2
     ../Modules/./os-controller-dashboard.sh following
-
-    #Enable Neutron VPN
-    read -r -p "12 - Do you want to enable Neutron VPN? [y/N]" userInputEnableNeutron
-    if [[ $userInputEnableNeutron =~ ^([yY][eE][sS]|[yY])$ ]]; then
-      echo "Enabling Neutron VPN"
-      sleep 2
-      ../Neutron_EnableVPN/./os-controller-EnableVPNneutron.sh following
-    fi
   fi
 fi
 if [[ "$1" != "required" ]] && [[ "$1" != "base" ]]; then
   #Installing OpenStack Cinder module
-  echo "13 - Installing Cinder module"
+  echo "12 - Installing Cinder module"
   sleep 2
-  read -p "Pause: "
   ../Modules/./os-controller-blockStorage.sh following
 
   #Installing OpenStack Swift module
-  echo "14 - Installing Swift module"
-  sleep 2
-  read -p "Pause: "
-  ../Modules/./os-controller-objectStorage.sh following
+  #echo "14 - Installing Swift module"
+  #sleep 2
+  #read -p "Pause: "
+  #../Modules/./os-controller-objectStorage.sh following
   #../Modules/Swift/./os-pos-controller-objectStorage.sh following
 
   #Installing OpenStack Heat module
-  echo "15 - Installing Heat module"
-  sleep 2
-  read -p "Pause: "
-  ../Modules/./os-controller-orchestration.sh following
+  #echo "15 - Installing Heat module"
+  #sleep 2
+  #read -p "Pause: "
+  #../Modules/./os-controller-orchestration.sh following
 
   #Installing OpenStack Ceilometer module
-  echo "16 - Installing Ceilometer module"
-  sleep 2
-  read -p "Pause: "
-  ../Modules/./os-controller-telemetry.sh following
+  #echo "16 - Installing Ceilometer module"
+  #sleep 2
+  #read -p "Pause: "
+  #../Modules/./os-controller-telemetry.sh following
 fi
 
 echo "END"

@@ -12,16 +12,16 @@ function getVariablesFromControllerConfigFile() {
       if [[ $line == *"ControllerHostname="* ]]; then
         IFS='=' read -a myarray1 <<< "$line"
         controllerHostname=${myarray1[1]}
-	  else
-		if [[ $line == *"ODHostname="* ]]; then
-		  IFS='=' read -a myarray2 <<< "$line"
-		  ODControllerHostname=${myarray2[1]}
-		else
-		  if [[ $line == *"ODControllerIPAddress="* ]]; then
-		    IFS='=' read -a myarray3 <<< "$line"
-		    ODControllerIPAddress=${myarray3[1]}
-		  fi
-		fi
+      else
+        if [[ $line == *"ODHostname="* ]]; then
+          IFS='=' read -a myarray2 <<< "$line"
+          ODControllerHostname=${myarray2[1]}
+        else
+          if [[ $line == *"ODControllerIPAddress="* ]]; then
+            IFS='=' read -a myarray3 <<< "$line"
+            ODControllerIPAddress=${myarray3[1]}
+          fi
+        fi
       fi
     fi
   done < "$configFilePathController"
