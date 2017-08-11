@@ -5,6 +5,7 @@ This readme may not be completed or updated.
 # Resume
 With this script it's possible to create a OpenStack Newton environment fully automated.
 This implementation require at least one controller node, one network node and one compute node.
+A Block Storage node is optional.
 OpenvSwitch is used.
 Integration with OpenDaylight openflow controller.
 
@@ -15,8 +16,7 @@ Integration with OpenDaylight openflow controller.
 - Configuration files from controller and network nodes not acessible from other servers. Configuration files need to be copied manually.
 
 # To do
-- Block and object storage nodes;
-- Other relevant nodes;
+- Object storage nodes;
 - More OpenStack Modules like orchestration or telemetry;
 - High availability scenarios.
 

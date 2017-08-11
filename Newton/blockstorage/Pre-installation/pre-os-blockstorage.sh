@@ -128,7 +128,7 @@ OSNetmask=$OSNetmask" >> ../configFileController.txt
 	done
   fi
 echo "blockstorageHostname=$blockstorageHostname
-" >> ../configFileController.txt
+" >> ../configFileBlockStorage.txt
 }
 ########
 

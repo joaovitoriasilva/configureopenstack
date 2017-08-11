@@ -18,22 +18,20 @@ if [[ "$EUID" -ne 0 ]]; then
   echo "Please run this script as root."
   exit
 else
-  if [[ "$1" != "required" ]] && [[ "$1" != "all" ]] && [[ "$1" != "optional" ]] && [[ "$1" != "base" ]] && [[ "$1" != "help" ]]; then
+  if [[ "$1" != "required" ]] && [[ "$1" != "base" ]] && [[ "$1" != "help" ]]; then
     if [[ "$1" == "" ]]; then
       echo "You need to specify one argument"
     else
       echo "Option -$1- not valid"
     fi
-    echo "Rerun script with a valid option (base, optional, required, all or help)"
+    echo "Rerun script with a valid option (base, all or help)"
     exit
   else
     if [[ "$1" == "help" ]]; then
       echo "Run the script with the following options:"
       echo "  help - Get script options"
       echo "  base - Only OpenStack core"
-      echo "  required - OpenStack core, Neutron and Nova modules"
       echo "  all - OpenStack core and all modules"
-      echo "  optional - Only optional modules - Ceilometer"
       exit
     else
       echo "Running script with -$1- enabled"
@@ -46,19 +44,11 @@ fi
 # Warnings for the user
 echo "This script was tested in Ubuntu 16.04. Other versions weren't tested."
 echo "You linux distribution will be tested for compatibility.\n"
-echo "This script will install all the components needed for a correct controller OpenStack installation."
-if [[ "$1" == "required" ]]; then
-  echo "It'll be installed the following OpenStack modules: Nova and Neutron"
-else
-  if [[ "$1" == "all" ]]; then
-    echo "It'll be installed the following OpenStack modules: Nova, Neutron and Ceilometer"
-  else
-    if [[ "$1" == "optional" ]]; then
-      echo "It'll be installed the following OpenStack modules: Ceilometer.\n"
-    fi
-  fi
+echo "This script will install all the components needed for a correct network OpenStack installation."
+if [[ "$1" != "base" ]]; then
+  echo "It'll be installed the following OpenStack modules: Block Storage"
 fi
-echo "This is a compute script."
+echo "This is a Block Storage script."
 echo "This script WILL need user input.\n"
 echo "Do not change the order of the provided directories or files.\n"
 read -r -p "Do you wish to continue? [y/N]" userInputInitialPrompt
@@ -104,30 +94,19 @@ if [[ "$1" != "optional" ]]; then
 
   # Install OpenStack packages
   echo "3 - Installing OpenStack packages"
-  echo "3.1 - Checking pre-requisites and updating repositories to OpenStack liberty version"
+  echo "3.1 - Checking pre-requisites and updating repositories to OpenStack newton version"
   apt-get install software-properties-common -y > /dev/null
-  add-apt-repository cloud-archive:newton -y 
-  apt-get update > /dev/null  && apt-get dist-upgrade -y > /dev/null
+  add-apt-repository cloud-archive:newton -y
+  apt-get update > /dev/null && apt-get dist-upgrade -y > /dev/null
   echo "3.2 - OpenStack packages"
   apt-get install python-openstackclient -y > /dev/null
 
   if [[ "$1" != "base" ]]; then
-    #Installing OpenStack Nova module
-    echo "4 - Installing Nova module"
+    #Installing OpenStack Block Storage module
+    echo "4 - Installing Block Storage module"
+	../Modules/./os-blockstorage-blockstorage.sh following
     sleep 2
-    ../Modules/./os-compute-compute.sh following
-
-    #Installing OpenStack Neutron module
-    echo "5 - Installing Neutron module"
-    sleep 2
-    ../Modules/./os-compute-network.sh following
   fi
-fi
-if [[ "$1" != "required" && "$1" != "base" ]]; then
-  #Installing OpenStack Block Storage module
-  echo "6 - Installing Block Storage module"
-  sleep 2
-  ../Modules/./os-compute-blockstorage.sh following
 fi
 
 echo "END"
